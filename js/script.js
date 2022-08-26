@@ -85,3 +85,5 @@ let nuevoProducto= {nuevoCategoria, nuevoNombre}
 carrito.push(nuevoProducto);
 
 console.log(carrito)
+
+inicioSesion();
