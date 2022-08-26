@@ -44,6 +44,10 @@ class Producto{
 
 				}
 
+const Productos =[taza , juegoPlatos, cubiertos, vasos, vaso, sarten, olla, cuadroS, cuadroM, cuadroL,
+reloj, plantaInterior, lamparaS, lamparaL];
+
+
 const taza= new Producto('Taza', 'hogar', 800);
 const juegoPlatos= new Producto('Juego de platos', 'hogar', 4000)
 const cubiertos= new Producto('Juego de cubiertos', 'hogar', 1500)
@@ -63,11 +67,11 @@ console.log(Producto)
 
 //Buscar categoria
 
-/*let keyword = prompt(‘Ingresa la categoria del producto que busca’);
+let keyword = prompt(‘Ingresa la categoria del producto que busca’);
 const filtrado = Producto.filter( (nuevoProducto) => nuevoProducto.categoria.includes(keyword));
 
 console.log(filtrado)
-*/
+
 
 //Carrito de compras 
 
