@@ -1,89 +1,153 @@
-let contraseña= "calculo";
+//catalogo de productos del Bazar utilizando array
 
-function inicioSesion() {
-	let ingreso = false;
+let catalogoBazar = [{
+		id:1,
+		nombre: 'Taza',
+		codigo: 'UN3N293',
+    	precio: 800,
+    	categoria: 'Hogar',
+    	imagen: './img/taza.jpg',
+    	descripcion: 'Taza hecha de ceramica'
+},{
+		id:2,
+		nombre: 'Juego de Platos',
+		codigo: 'UN520S',
+		categoria: 'Hogar',
+    	precio: 4000,
+    	imagen: './img/platos.jpg',
+    	descripcion: 'Juego de platos de cristal, 12 unidades'
+},{
+		id:3,
+		nombre: 'Cubiertos',
+		codigo: 'UN3820',
+		categoria: 'Hogar',
+    	precio: 1500,
+    	imagen: './img/cubiertos.jpg',
+    	descripcion: 'Juego de cubiertos de acero'
+},{
+		id:4,
+		nombre:'Vasos',
+		codigo: 'UN2933',
+		categoria: 'Hogar',
+    	precio: 900,
+    	imagen: './img/vasos.jpg',
+    	descripcion: 'Juego de vasos de vidrio, 6 unidades'
+},{
+		id:5,
+		nombre: 'Vaso',
+		codigo: 'UN2933',
+		categoria:'Hogar',
+    	precio: 250,
+    	imagen: './img/vaso.jpg',
+    	descripcion: 'Vaso de vidrio por unidad.'
+},{
+		id:6,
+		nombre: 'Sarten',
+		codigo: 'UN63923',
+		categoria: 'Cocina',
+    	precio: 3000,
+    	imagen: './img/sartren.jpg',
+    	descripcion: 'Sarten anitadherente SKK 4cm'
+},{
+		id:7,
+		nombre: 'Olla',
+		codigo: 'UN38294',
+		categoria: 'Cocina',
+    	precio: 3500,
+    	imagen: './img/olla.jpg',
+    	descripcion: 'Olla de aluminio con doble tapa, anitadherente reforzado con titanio'
+},{
+		id:8,
+		nombre: 'Cuadro pequeño',
+		codigo: 'UN38j2i4',
+		categoria: 'Decoracion',
+    	precio: 1200,
+    	imagen: './img/cuadroS.jpg',
+    	descripcion: 'Cuadro pequeño, medida 15x21'
+},{
+		id:9,
+		nombre:'Cuadro mediano',
+		codigo: 'UN32942',
+		categoria: 'Decoracion',
+    	precio: 1800,
+    	imagen: './img/cuadroM.jpg',
+    	descripcion: 'Cuadro mediano, medida 21x30'
+},{
+		id:10,
+		nombre: 'Cuadro Grande',
+		codigo: 'UN28442',
+		categoria: 'Decoracion',
+    	precio: 2400,
+    	imagen: './img/cuadroL.jpg',
+    	descripcion: 'Cuadro grande, medida 45x65'
+},{
+		id:11,
+		nombre: 'Reloj',
+		codigo: 'UN38j2i4',
+		categoria: 'Decoracion',
+    	precio: 1800,
+    	imagen: './img/reloj.jpg',
+    	descripcion: 'Reloj de pared'
+},{
+		id:12,
+		nombre: 'Planta de interior',
+		codigo: 'UN9492',
+		categoria:'Decoracion',
+    	precio: 1500,
+    	imagen: './img/plantaint.jpg',
+    	descripcion: 'Planta para interiores'
+},{
+		id:13,
+		nombre: 'Lampara pequeña',
+		codigo: 'UN38j2i4',
+		categoria: 'Decoracion',
+    	precio: 1300,
+    	imagen: './img/lampara.jpeg',
+    	descripcion: 'Lampara pequeña de lectura'
+},{
+		id:14,
+		nombre: 'Lampara grande',
+		codigo: 'UN3424',
+		categoria: 'Decoracion',
+    	precio: 6390,
+    	imagen: './img/lamparaM.jpg',
+    	descripcion: 'Lampara de decoracion tamaño mediano'
+}];
 
-		for(let i=3; i<=3; i--) {
-			let tuContraseña = prompt("Ingresa tu contraseña");
+//Eventos y DOM
 
-			if(tuContraseña===contraseña){
-				alert("Bienvenido/a!");
-				ingreso= true;
-				break;
-			}
-			else{
-				alert("Contraseña incorrecta, te quedan " + i + " intentos.")
-			}
-		}
+let contenedorTarjetas = document.querySelector(‘.contenedorTarjetas’);
 
-	return ingreso;
+function crearTarjetas(array, contenedor) {
+    contenedor.innerHTML = '';
+    for (const item of array) {
+        let tarjeta = document.createElement('div');
+        tarjeta.className = 'card my-5 bg-light';
+        tarjeta.id = `${item.id}`;
+        tarjeta.innerHTML = `
+        <h4 class="card-header">${item.nombre}</h4>
+        <img src="${item.imagen}" class="card-img-top imagenProducto" alt="${item.descripcion_corta}">
+        <div class="card-body">
+            <p class="card-text">${item.descripcion}</p>
+            <span id="precio">$ ${item.precio}</span>
+        </div>
+        <div class="card-footer"><a href="#" class="btn btn-primary">Comprar</a></div>`;
+        contenedor.append(tarjeta)
+    }
+
 }
 
+function buscar(array, criterio, input) {
+    return array.filter((item) => item[criterio].includes(input))
+}
 
-inicioSesion();
+crearTarjetas(catalogo, contenedorTarjetas);
 
-//Calculadora para ganancia de un bazar
+let busqueda = document.querySelectorAll('.inputBusqueda');
 
-const suma = (a,b) => a + b;
-const ganancia = (a,b) => a - b;
-const porcentajeGanancia = x => x * 1.20; //este numero es porque el vendedor quiere sacar un 20% de ganancia
-
-let precioCosto= parseInt(prompt("Ingrese precio costo"));
-let precioVenta= ganancia(suma(precioCosto,porcentajeGanancia(precioCosto)), precioCosto);
-
-console.log(precioVenta);
-
-//productos
-
-class Producto{
-		constructor(nombre, categoria, precio){
-	this.nombre= nombre;
-	this.categoria = categoria;
-	this.precio= parseFloat(precio);
-					}
-
-				}
-
-const Productos =[taza , juegoPlatos, cubiertos, vasos, vaso, sarten, olla, cuadroS, cuadroM, cuadroL,
-reloj, plantaInterior, lamparaS, lamparaL];
-
-
-const taza= new Producto('Taza', 'hogar', 800);
-const juegoPlatos= new Producto('Juego de platos', 'hogar', 4000)
-const cubiertos= new Producto('Juego de cubiertos', 'hogar', 1500)
-const vasos= new Producto('Vasos', 'hogar', 900)
-const vaso= new Producto('Vaso', 'hogar', 250)
-const sarten= new Producto('Sarten', 'cocina', 3000)
-const olla= new Producto('Olla', 'cocina', 3500)
-const cuadroS= new Producto('Cuadro pequeño', 'decoracion', 1200)
-const cuadroM= new Producto('Cuadro mediano', 'decoracion', 1800)
-const cuadroL= new Producto('Cuadro grande', 'decoracion', 2400)
-const reloj= new Producto('Reloj', 'decoracion', 1800)
-const plantaInterior= new Producto('Planta de interior', 'decoracion', 1500)
-const lamparaS= new Producto ('Lampara pequeña', 'decoracion', 1300)
-const lamparaL= new Producto('Lampara grande', 'decoracion', 2000)
-
-console.log(Producto)
-
-//Buscar categoria
-
-let keyword = prompt(‘Ingresa la categoria del producto que busca’);
-const filtrado = Producto.filter( (nuevoProducto) => nuevoProducto.categoria.includes(keyword));
-
-console.log(filtrado)
-
-
-//Carrito de compras 
-
-const carrito= []
-
-let nuevoCategoria= prompt('Ingrese la categoria del producto que quiere comprar')
-let nuevoNombre=prompt('Ingrese nombre del producto que quiere comprar')
-
-let nuevoProducto= {nuevoCategoria, nuevoNombre}
-
-carrito.push(nuevoProducto);
-
-console.log(carrito)
-
-inicioSesion();
+busqueda.forEach(input => {
+    input.addEventListener('input', () => {
+        let cadena = (input.value).toUpperCase();
+        console.log(cadena);
+        crearTarjetas(buscar(catalogo, input.id, cadena), contenedorTarjetas);
+    })

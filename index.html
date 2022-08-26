@@ -6,11 +6,11 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
-	<title>Calculos de ganancia</title>
+	<link rel="stylesheet" href="css/estilo.css">
+	<title>Bazar Las Flores-Compra Online</title>
 </head>
 <body>
-	<main>
-		<nav class="navbar bg-light">
+	<nav class="navbar bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">
       <img src="img/logo.png" alt="Logo del Bazar" width="30" height="24" class="d-inline-block align-text-top">
@@ -18,8 +18,71 @@
     </a>
   </div>
 </nav>
-<h1>Bienvenido a Bazar Las Flores</h1>
-	</main>
+
+<main>
+	<h1>Bienvenido a Bazar Las Flores</h1>
+<!--Form para completar datos de comprador-->
+	 <form class="row g-3 my-5">
+            <legend class="h2">Datos de comprador</legend>
+            <div class="col-md-5">
+                <label for="inputNombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="inputNombre" placeholder="Ingrese su nombre">
+            </div>
+            <div class="col-md-5">
+                <label for="inputApellido" class="form-label">Apellido</label>
+                <input type="text" class="form-control" id="inputApellido" placeholder="Su apellido">
+            </div>
+            <div class="col-md-2">
+                <label for="inputDNI" class="form-label">DNI</label>
+                <input type="text" class="form-control" id="inputDNI" placeholder="su DNI">
+            </div>
+            <div class="col-md-6">
+                <label for="inputEmail" class="form-label">Email</label>
+                <input type="email" class="form-control" id="inputEmail" placeholder="su E-mail">
+            </div>
+            <div class="col-12">
+                <label for="inputDireccion" class="form-label">Dirección</label>
+                <input type="text" class="form-control" id="inputDireccion" placeholder="su calle y numeracion">
+            </div>
+            <div class="col-md-2">
+                <label for="inputCP" class="form-label">Código postal</label>
+                <input type="text" class="form-control" id="inputCP" placeholder="código postal de su ciudad">
+            </div>
+            <div class="col-md-4">
+                <label for="inputProvincia" class="form-label">Provincia</label>
+                <select id="inputProvincia" class="form-select">
+                    <option value="bsas">Buenos Aires</option>
+                    <option value="Cordoba">Cordoba</option>
+                    <option value="SantaFe">Santa Fe</option>
+                </select>
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Registrarme</button>
+            </div>
+        </form>
+ <!--Tienda-->
+     <div class="tienda">
+            <h2>Tienda</h2>
+            <p class="saludo">
+            </p>
+            <div class="busqueda">
+                <div>
+                    <label for="buscaNombre" class="busqueda"><p>Buscar por nombre</p></label>
+                    <input type="text" name="" id="nombre">
+                </div>
+                <div>
+                    <label for="buscaCategoria"><p>Buscar por categoria</p></label>
+                    <input type="text" name="" class="inputBusqueda" id="categoria">
+                </div>
+            </div>
+            <div class="contenedorTarjetas card-group">
+            </div>
+        </div>
+</main>
+
+<footer class="bg-light">
+	<p>¡Gracias por confiar en nuestros productos y servicios!</p>
+</footer>
 <!--scrip de bs-->
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 <!--Mi archivo js-->

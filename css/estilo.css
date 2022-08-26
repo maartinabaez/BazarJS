@@ -1,10 +1,91 @@
+* {
+  margin: 0;
+  padding: 0; }
+
+main{
+	height: auto;
+	width: 100vw;
+	background-image: url(../img/background.jpg);
+ 	 background-repeat: no-repeat;
+  	background-position: center;
+ 	 background-size: cover;
+	}
 a{
 	text-decoration: none;
-	font-family: 'Poppins', sans-serif;;
-	font-size: 1em;
+	font-family: 'Poppins', sans-serif;
+	font-size: 2em;
 }
 
 h1{
 	font-family:'Poppins', sans-serif;;
 	font-size: 3em;
+	text-align: center;
+	color: white;
+	text-shadow: black;
+}
+
+h2{
+	font-family:'Poppins', sans-serif;;
+	font-size: 2em;
+	text-align: center;
+	color: black;
+}
+form {
+  width: 50vw;
+  margin: 0 auto;
+  background-color: white;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+  color: black;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 1px;
+  font-size: 2rem;
+  text-align: center; 
+}
+
+p{
+	font-family:'Poppins', sans-serif;;
+	font-size: 1.5em;
+	text-align: center;
+	color: black;
+}
+
+.tienda{
+	padding: 1em;
+    margin: 2em 0;
+    background-color: violet;
+    opacity: 0.5;
+    display: grid;
+    grid-template-rows: 50px 50px 50px auto;
+    grid-template-columns: repeat(3 1fr);
+    grid-template-areas:
+        "titulo titulo titulo"
+        "saludo saludo saludo"
+        "busqueda busqueda busqueda"
+        "content content content";
+}
+
+.tituloTienda {
+    grid-area: titulo;
+}
+
+.saludo {
+    grid-area: saludo;
+}
+
+.busqueda {
+    grid-area: busqueda;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.contenedorTarjetas {
+    grid-area: content;
+}
+
+}
+
+label{
+	font-family: 'Poppins', sans-serif;
+
 }
