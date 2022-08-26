@@ -116,13 +116,13 @@ let catalogoBazar = [{
 
 //Eventos y DOM
 
-let contenedorTarjetas = document.querySelector(‘.contenedorTarjetas’);
+let contenedorTarjetas = document.querySelector('.contenedorTarjetas');
 
 function crearTarjetas(array, contenedor) {
     contenedor.innerHTML = '';
     for (const item of array) {
         let tarjeta = document.createElement('div');
-        tarjeta.className = 'card my-5 bg-light';
+        tarjeta.className = 'card my-5';
         tarjeta.id = `${item.id}`;
         tarjeta.innerHTML = `
         <h4 class="card-header">${item.nombre}</h4>
@@ -141,7 +141,7 @@ function buscar(array, criterio, input) {
     return array.filter((item) => item[criterio].includes(input))
 }
 
-crearTarjetas(catalogo, contenedorTarjetas);
+crearTarjetas(catalogoBazar, contenedorTarjetas);
 
 let busqueda = document.querySelectorAll('.inputBusqueda');
 
@@ -149,5 +149,6 @@ busqueda.forEach(input => {
     input.addEventListener('input', () => {
         let cadena = (input.value).toUpperCase();
         console.log(cadena);
-        crearTarjetas(buscar(catalogo, input.id, cadena), contenedorTarjetas);
+        crearTarjetas(buscar(catalogoBazar, input.id, cadena), contenedorTarjetas);
+    	})
     })

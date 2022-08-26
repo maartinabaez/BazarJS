@@ -56,21 +56,16 @@ p{
     background-color: violet;
     opacity: 0.5;
     display: grid;
-    grid-template-rows: 50px 50px 50px auto;
+    grid-template-rows: 50px 50px auto;
     grid-template-columns: repeat(3 1fr);
     grid-template-areas:
         "titulo titulo titulo"
-        "saludo saludo saludo"
         "busqueda busqueda busqueda"
         "content content content";
 }
 
 .tituloTienda {
     grid-area: titulo;
-}
-
-.saludo {
-    grid-area: saludo;
 }
 
 .busqueda {
