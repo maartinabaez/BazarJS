@@ -114,6 +114,16 @@ let catalogoBazar = [{
     	descripcion: 'Lampara de decoracion tamaño mediano'
 }];
 
+//Registro de sesion
+let nombreUsuario= document.getElementById('inputNombre');
+let btnLogin = document.getElementById('registrarme');
+
+//Capturar la informacion cuando el usuario haga click en el boton inicio de sesion
+btnLogin.addEventListener('click', ()=>{
+	localStorage.setItem('nombre', nombreUsuario.value)
+	})
+
+
 //Eventos y DOM
 
 let contenedorTarjetas = document.querySelector('.contenedorTarjetas');
@@ -137,11 +147,14 @@ function crearTarjetas(array, contenedor) {
 
 }
 
+//Tarjetas creadas y busqueda 
 function buscar(array, criterio, input) {
     return array.filter((item) => item[criterio].includes(input))
 }
 
 crearTarjetas(catalogoBazar, contenedorTarjetas);
+
+
 
 let busqueda = document.querySelectorAll('.inputBusqueda');
 
@@ -152,3 +165,27 @@ busqueda.forEach(input => {
         crearTarjetas(buscar(catalogoBazar, input.id, cadena), contenedorTarjetas);
     	})
     })
+
+
+//Agregar al carrito
+let carrito = [];
+const addProds =()=>{
+return new Promise((resolve,reject)=>{
+    setTimeout(()=>{
+        resolve(catalogoBazar)
+    },600)
+})
+}
+
+const btnComprar = document.querySelector('.btn');
+
+btnComprar.addEventListener('Click',()=>{
+		btnComprar.forEach(element=>{
+				element.onclick = () =>{
+						carrito.push(elemento.id)
+					}
+				})
+			})
+
+
+console.log(fetch(‘url’) .then((response)=>response.json()))

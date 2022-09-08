@@ -84,3 +84,19 @@ label{
 	font-family: 'Poppins', sans-serif;
 
 }
+
+h4{
+	font-family:'Poppins', sans-serif;;
+	font-size: 1em;
+	text-align: center;
+	color: black;
+}
+
+span{
+	font-family:'Poppins', sans-serif;;
+	font-size: 2em;
+	text-align: center;
+	color: black;
+}
+
+
