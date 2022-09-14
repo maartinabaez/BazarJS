@@ -123,6 +123,15 @@ btnLogin.addEventListener('click', ()=>{
 	localStorage.setItem('nombre', nombreUsuario.value)
 	})
 
+//Formulario enviado
+let formUser = document.getElementById("formulario");
+formUser.addEventListener("submit", validarFormulario);
+
+function validarFormulario(e){
+    e.preventDefault();
+    console.log("Formulario Enviado");    
+}
+
 
 //Eventos y DOM
 
@@ -141,11 +150,12 @@ function crearTarjetas(array, contenedor) {
             <p class="card-text">${item.descripcion}</p>
             <span id="precio">$ ${item.precio}</span>
         </div>
-        <div class="card-footer"><a href="#" class="btn btn-primary">Comprar</a></div>`;
+        <div class="card-footer"><a href="#" class="btn btn-primary add-cart" id="btnComprar">Comprar</a></div>`;
         contenedor.append(tarjeta)
     }
 
 }
+
 
 //Tarjetas creadas y busqueda 
 function buscar(array, criterio, input) {
@@ -154,38 +164,36 @@ function buscar(array, criterio, input) {
 
 crearTarjetas(catalogoBazar, contenedorTarjetas);
 
-
-
 let busqueda = document.querySelectorAll('.inputBusqueda');
-
 busqueda.forEach(input => {
     input.addEventListener('input', () => {
-        let cadena = (input.value).toUpperCase();
-        console.log(cadena);
+        let cadena = input.value;
         crearTarjetas(buscar(catalogoBazar, input.id, cadena), contenedorTarjetas);
     	})
     })
 
 
 //Agregar al carrito
-let carrito = [];
-const addProds =()=>{
-return new Promise((resolve,reject)=>{
-    setTimeout(()=>{
-        resolve(catalogoBazar)
-    },600)
-})
+  //Alert de producto agregado al carrito
+let buyProduct = document.getElementById("btnComprar");
+buyProduct.addEventListener("click", addCartAlert);
+
+function addCartAlert(e){
+    e.preventDefault();
+    alert("¡Agregaste el producto al carrito!");
 }
 
-const btnComprar = document.querySelector('.btn');
-
-btnComprar.addEventListener('Click',()=>{
-		btnComprar.forEach(element=>{
-				element.onclick = () =>{
-						carrito.push(elemento.id)
-					}
-				})
-			})
+let listaProductos = document.getElementById("lista-productos");
 
 
-console.log(fetch(‘url’) .then((response)=>response.json()))
+function addCart(e){
+    e.preventDefault();
+    for(const item of catalogoBazar){
+        let tabla = document.createElement("td");
+        tabla.innerHTML = `<p>Productos agregados</p>
+        <tr>${item.nombre}</tr>
+        <tr>${item.categoria}</tr>
+        <tr>${item.precio}</tr>
+        `
+    }
+}

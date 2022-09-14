@@ -22,7 +22,7 @@
 <main>
 	<h1>Bienvenido a Bazar Las Flores</h1>
 <!--Form para completar datos de comprador-->
-	 <form class="row g-3 my-5">
+	 <form class="row g-3 my-5" id="formulario">
             <legend class="h2">Datos de comprador</legend>
             <div class="col-md-5">
                 <label for="inputNombre" class="form-label">Nombre</label>
@@ -60,9 +60,13 @@
                 <button type="submit" id="registrarme" class="btn btn-primary">Registrarme</button>
             </div>
         </form>
+
+<!--carrito-->
+<h2>Tu carrito</h2>
+<div id="lista-productos"></div>
  <!--Tienda-->
      <div class="tienda">
-            <h2>Tienda</h2>
+            <h3>Tienda</h3>
             <div class="busqueda">
                 <div>
                     <label for="buscaNombre" class="busqueda"><p>Buscar por nombre</p></label>
