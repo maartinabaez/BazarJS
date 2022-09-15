@@ -3,27 +3,11 @@ const items = document.getElementById('items');
 const footer = document.getElementById('footer');
 const templateCard = document.getElementById('template-card').content;
 const templateFooter = document.getElementById('template-footer').content;
-const templateCarrito = document.getElementById('template-carrito')
+const templateCarrito = document.getElementById('template-carrito');
 const fragmento = document.createDocumentFragment();
 let carrito = [];
 
 //Fetch
-
-document.addEventListener('DOMContentLoaded', ()=>{
-    fetchData();
-    if(localStorage.getItem('carrito')) {
-        carrito = JSON.parse(localStorage.getItem('carrito'))
-        crearCarrito()
-    }
-})
-//Eventos
-cards.addEventListener("click", e =>{
-    addCarrito(e)
-})
-
-items.addEventListener('click', e=>{
-    btnAccion(e)
-})
 
 const fetchData = async () => {
     try {
@@ -37,6 +21,37 @@ const fetchData = async () => {
     } catch (error){
         console.log('error')
     }
+}
+
+document.addEventListener('DOMContentLoaded', ()=>{
+    fetchData();
+    if(localStorage.getItem('carrito')) {
+        carrito = JSON.parse(localStorage.getItem('carrito'))
+        crearCarrito();
+    }
+})
+
+
+//Libreria 
+
+const btnBuy = document.querySelector('btn-dark');
+btnBuy.addEventListener('click', e => {
+    Swal.fire({
+        title: '¡Genial!',
+        text: '¡Haz agregado el producto al carrito!',
+        icon: 'success',
+        confirmButtonText: 'Cool'
+    })
+})
+
+//Eventos
+cards.addEventListener("click", e =>{
+    addCarrito(e);
+})
+
+items.addEventListener('click', e=>{
+    btnAccion(e);
+})
 
 
 //Imprimir las tarjetas en la pantalla
@@ -51,7 +66,7 @@ const crearTarjetas = data =>{
             fragment.appendChild(clone)
         })
     
-    cards.appendChild(fragment)
+    cards.appendChild(fragment);
 }
 
 //Agregar producto al carrito
@@ -60,7 +75,7 @@ const addCarrito = e =>{
     if(e.target.classList.contains('btn-dark')){
         setCarrito(e.target.parentElement)
     }
-    e.stopPropagation()
+    e.stopPropagation();
 }
 
 //Producto en carrito aumenta cantidad de unidades. Creacion o sobre escribirlo.
@@ -76,7 +91,7 @@ const setCarrito = objeto =>{
     }
 
     carrito[producto.id] = {...producto}
-    crearCarrito()
+    crearCarrito();
     } 
 
 const crearCarrito = () =>{
@@ -92,11 +107,11 @@ const crearCarrito = () =>{
             fragment.appendChild(clone)
     })
 
-    items.appendChild(fragment)
+    items.appendChild(fragment);
 
-    crearFooter()
+    crearFooter();
 
-    localStorage.setItem('carrito', JSON.stringify(carrito))
+    localStorage.setItem('carrito', JSON.stringify(carrito));
 }
 
 const crearFooter = () => {
@@ -105,7 +120,7 @@ const crearFooter = () => {
         footer.innerHTML = `
         <th scope="row" colspan="5"> Carrito vacio, ¡comienza a comprar!</th>
         `
-        return 
+        return;
     }
 
 //Calculo de precio 
@@ -121,7 +136,7 @@ const crearFooter = () => {
     const btnVaciar = getElementById('vaciar-carrito')
     btnVaciar.addEventListener('click', () => {
         carrito= [];
-        crearCarrito()
+        crearCarrito();
     })
 }
 
@@ -133,7 +148,7 @@ const btnAccion = e =>{
         const producto = carrito[e.target.dataset.id]
         producto.cantidad = carrito[e.target.dataset.id].cantidad + 1
         carrito[e.target.dataset.id] = {...producto}
-        crearCarrito()
+        crearCarrito();
     }
     if (e.target.classList.contains('btn-danger')) {
         const producto = carrito[e.target.dataset.id]
@@ -143,5 +158,6 @@ const btnAccion = e =>{
         }
         crearCarrito()
     }
-    e.stopPropagation();
-    }
+
+    e.stopPropagation()
+}
