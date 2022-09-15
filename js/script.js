@@ -1,199 +1,147 @@
-//catalogo de productos del Bazar utilizando array
+const cards = document.getElementById('cards');
+const items = document.getElementById('items');
+const footer = document.getElementById('footer');
+const templateCard = document.getElementById('template-card').content;
+const templateFooter = document.getElementById('template-footer').content;
+const templateCarrito = document.getElementById('template-carrito')
+const fragmento = document.createDocumentFragment();
+let carrito = [];
 
-let catalogoBazar = [{
-		id:1,
-		nombre: 'Taza',
-		codigo: 'UN3N293',
-    	precio: 800,
-    	categoria: 'Hogar',
-    	imagen: './img/taza.jpg',
-    	descripcion: 'Taza hecha de ceramica'
-},{
-		id:2,
-		nombre: 'Juego de Platos',
-		codigo: 'UN520S',
-		categoria: 'Hogar',
-    	precio: 4000,
-    	imagen: './img/platos.jpg',
-    	descripcion: 'Juego de platos de cristal, 12 unidades'
-},{
-		id:3,
-		nombre: 'Cubiertos',
-		codigo: 'UN3820',
-		categoria: 'Hogar',
-    	precio: 1500,
-    	imagen: './img/cubiertos.jpg',
-    	descripcion: 'Juego de cubiertos de acero'
-},{
-		id:4,
-		nombre:'Vasos',
-		codigo: 'UN2933',
-		categoria: 'Hogar',
-    	precio: 900,
-    	imagen: './img/vasos.jpg',
-    	descripcion: 'Juego de vasos de vidrio, 6 unidades'
-},{
-		id:5,
-		nombre: 'Vaso',
-		codigo: 'UN2933',
-		categoria:'Hogar',
-    	precio: 250,
-    	imagen: './img/vaso.jpg',
-    	descripcion: 'Vaso de vidrio por unidad.'
-},{
-		id:6,
-		nombre: 'Sarten',
-		codigo: 'UN63923',
-		categoria: 'Cocina',
-    	precio: 3000,
-    	imagen: './img/sartren.jpg',
-    	descripcion: 'Sarten anitadherente SKK 4cm'
-},{
-		id:7,
-		nombre: 'Olla',
-		codigo: 'UN38294',
-		categoria: 'Cocina',
-    	precio: 3500,
-    	imagen: './img/olla.jpg',
-    	descripcion: 'Olla de aluminio con doble tapa, anitadherente reforzado con titanio'
-},{
-		id:8,
-		nombre: 'Cuadro pequeño',
-		codigo: 'UN38j2i4',
-		categoria: 'Decoracion',
-    	precio: 1200,
-    	imagen: './img/cuadroS.jpg',
-    	descripcion: 'Cuadro pequeño, medida 15x21'
-},{
-		id:9,
-		nombre:'Cuadro mediano',
-		codigo: 'UN32942',
-		categoria: 'Decoracion',
-    	precio: 1800,
-    	imagen: './img/cuadroM.jpg',
-    	descripcion: 'Cuadro mediano, medida 21x30'
-},{
-		id:10,
-		nombre: 'Cuadro Grande',
-		codigo: 'UN28442',
-		categoria: 'Decoracion',
-    	precio: 2400,
-    	imagen: './img/cuadroL.jpg',
-    	descripcion: 'Cuadro grande, medida 45x65'
-},{
-		id:11,
-		nombre: 'Reloj',
-		codigo: 'UN38j2i4',
-		categoria: 'Decoracion',
-    	precio: 1800,
-    	imagen: './img/reloj.jpg',
-    	descripcion: 'Reloj de pared'
-},{
-		id:12,
-		nombre: 'Planta de interior',
-		codigo: 'UN9492',
-		categoria:'Decoracion',
-    	precio: 1500,
-    	imagen: './img/plantaint.jpg',
-    	descripcion: 'Planta para interiores'
-},{
-		id:13,
-		nombre: 'Lampara pequeña',
-		codigo: 'UN38j2i4',
-		categoria: 'Decoracion',
-    	precio: 1300,
-    	imagen: './img/lampara.jpeg',
-    	descripcion: 'Lampara pequeña de lectura'
-},{
-		id:14,
-		nombre: 'Lampara grande',
-		codigo: 'UN3424',
-		categoria: 'Decoracion',
-    	precio: 6390,
-    	imagen: './img/lamparaM.jpg',
-    	descripcion: 'Lampara de decoracion tamaño mediano'
-}];
+//Fetch
 
-//Registro de sesion
-let nombreUsuario= document.getElementById('inputNombre');
-let btnLogin = document.getElementById('registrarme');
+document.addEventListener('DOMContentLoaded', ()=>{
+    fetchData();
+    if(localStorage.getItem('carrito')) {
+        carrito = JSON.parse(localStorage.getItem('carrito'))
+        crearCarrito()
+    }
+})
+//Eventos
+cards.addEventListener("click", e =>{
+    addCarrito(e)
+})
 
-//Capturar la informacion cuando el usuario haga click en el boton inicio de sesion
-btnLogin.addEventListener('click', ()=>{
-	localStorage.setItem('nombre', nombreUsuario.value)
-	})
+items.addEventListener('click', e=>{
+    btnAccion(e)
+})
 
-//Formulario enviado
-let formUser = document.getElementById("formulario");
-formUser.addEventListener("submit", validarFormulario);
-
-function validarFormulario(e){
-    e.preventDefault();
-    console.log("Formulario Enviado");    
-}
-
-
-//Eventos y DOM
-
-let contenedorTarjetas = document.querySelector('.contenedorTarjetas');
-
-function crearTarjetas(array, contenedor) {
-    contenedor.innerHTML = '';
-    for (const item of array) {
-        let tarjeta = document.createElement('div');
-        tarjeta.className = 'card my-5';
-        tarjeta.id = `${item.id}`;
-        tarjeta.innerHTML = `
-        <h4 class="card-header">${item.nombre}</h4>
-        <img src="${item.imagen}" class="card-img-top imagenProducto" alt="${item.descripcion_corta}">
-        <div class="card-body">
-            <p class="card-text">${item.descripcion}</p>
-            <span id="precio">$ ${item.precio}</span>
-        </div>
-        <div class="card-footer"><a href="#" class="btn btn-primary add-cart" id="btnComprar">Comprar</a></div>`;
-        contenedor.append(tarjeta)
+const fetchData = async () => {
+    try {
+        const respuesta = await fetch('data.json',{
+            method: 'GET',
+            headers: new Headers({ 'Content-type': 'application/json'}),
+            mode: 'no-cors'
+});
+        const data = await respuesta.json()
+        crearTarjetas(data)
+    } catch (error){
+        console.log('error')
     }
 
+
+//Imprimir las tarjetas en la pantalla
+const crearTarjetas = data =>{
+        data.forEach(producto =>{
+            templateCard.querySelector('h3').textContent = producto.nombre
+            templateCard.querySelector('p').textContent = producto.precio
+            templateCard.querySelector('img').setAttribute("src", producto.imagen)
+            templateCard.querySelector('.btn-dark').dataset.id = producto.id
+
+            const clone = templateCard.cloneNode(true)
+            fragment.appendChild(clone)
+        })
+    
+    cards.appendChild(fragment)
 }
 
+//Agregar producto al carrito
 
-//Tarjetas creadas y busqueda 
-function buscar(array, criterio, input) {
-    return array.filter((item) => item[criterio].includes(input))
+const addCarrito = e =>{
+    if(e.target.classList.contains('btn-dark')){
+        setCarrito(e.target.parentElement)
+    }
+    e.stopPropagation()
 }
 
-crearTarjetas(catalogoBazar, contenedorTarjetas);
+//Producto en carrito aumenta cantidad de unidades. Creacion o sobre escribirlo.
+const setCarrito = objeto =>{
+    const producto = {
+        id: objeto.querySelector('.btn-dark').dataset.id,
+        title: objeto.querySelector('h3').textContent,
+        precio: objeto.querySelector('p').textContent,
+        cantidad: 1
+    }
+    if (carrito.hasOwnProperty(producto.id)) {
+        producto.cantidad = carrito[producto.id].cantidad + 1
+    }
 
-let busqueda = document.querySelectorAll('.inputBusqueda');
-busqueda.forEach(input => {
-    input.addEventListener('input', () => {
-        let cadena = input.value;
-        crearTarjetas(buscar(catalogoBazar, input.id, cadena), contenedorTarjetas);
-    	})
+    carrito[producto.id] = {...producto}
+    crearCarrito()
+    } 
+
+const crearCarrito = () =>{
+    items.innerHTML = ''
+    object.values(carrito).forEach(producto =>{
+            templateCarrito.querySelector('th').textContent = producto.id
+            templateCarrito.querySelectorAll('td')[0].textContent = producto.title
+            templateCarrito.querySelectorAll('td')[1].textContent = producto.cantidad
+            templateCarrito.querySelector('.btn-info').dataset.id = producto.id
+            templateCarrito.querySelector('btn-danger').dataset.id= producto.id
+            templateCarrito.querySelector('span').textContent = producto.cantidad * producto.precio
+            const clone = templateCarrito.cloneNode(true)
+            fragment.appendChild(clone)
     })
 
+    items.appendChild(fragment)
 
-//Agregar al carrito
-  //Alert de producto agregado al carrito
-let buyProduct = document.getElementById("btnComprar");
-buyProduct.addEventListener("click", addCartAlert);
+    crearFooter()
 
-function addCartAlert(e){
-    e.preventDefault();
-    alert("¡Agregaste el producto al carrito!");
+    localStorage.setItem('carrito', JSON.stringify(carrito))
 }
 
-let listaProductos = document.getElementById("lista-productos");
-
-
-function addCart(e){
-    e.preventDefault();
-    for(const item of catalogoBazar){
-        let tabla = document.createElement("td");
-        tabla.innerHTML = `<p>Productos agregados</p>
-        <tr>${item.nombre}</tr>
-        <tr>${item.categoria}</tr>
-        <tr>${item.precio}</tr>
+const crearFooter = () => {
+    footer.innerHTML= '';
+    if(Object.keys(carrito).lenght === 0){
+        footer.innerHTML = `
+        <th scope="row" colspan="5"> Carrito vacio, ¡comienza a comprar!</th>
         `
+        return 
     }
+
+//Calculo de precio 
+    const nCantidad = Object.values(carrito).reduce((acc, {cantidad}) => acc + cantidad ,0)
+    const nPrecio = Object.values(carrito).reduce((acc, {cantidad, precio})=> acc + cantidad * precio,0)
+    
+    templateFooter.querySelectorAll('td')[0].textContent = nCantidad
+    templateFooter.querySelector('span').textContent = nPrecio
+
+    const clone =  templateFooter.cloneNode(true)
+    fragment.appendChild(clone)
+    footer.appendChild(fragment)
+    const btnVaciar = getElementById('vaciar-carrito')
+    btnVaciar.addEventListener('click', () => {
+        carrito= [];
+        crearCarrito()
+    })
 }
+
+//Detectar los botones 
+const btnAccion = e =>{
+    console.log(e.target)
+    //Accion de aumentar
+    if(e.target.classList.contains('btn-info')){
+        const producto = carrito[e.target.dataset.id]
+        producto.cantidad = carrito[e.target.dataset.id].cantidad + 1
+        carrito[e.target.dataset.id] = {...producto}
+        crearCarrito()
+    }
+    if (e.target.classList.contains('btn-danger')) {
+        const producto = carrito[e.target.dataset.id]
+        producto.cantidad--
+        if (producto.cantidad === 0) {
+            delete carrito[e.target.dataset.id]
+        }
+        crearCarrito()
+    }
+    e.stopPropagation();
+    }

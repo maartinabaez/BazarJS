@@ -21,65 +21,70 @@
 
 <main>
 	<h1>Bienvenido a Bazar Las Flores</h1>
-<!--Form para completar datos de comprador-->
-	 <form class="row g-3 my-5" id="formulario">
-            <legend class="h2">Datos de comprador</legend>
-            <div class="col-md-5">
-                <label for="inputNombre" class="form-label">Nombre</label>
-                <input type="text" class="form-control" id="inputNombre" placeholder="Ingrese su nombre">
-            </div>
-            <div class="col-md-5">
-                <label for="inputApellido" class="form-label">Apellido</label>
-                <input type="text" class="form-control" id="inputApellido" placeholder="Su apellido">
-            </div>
-            <div class="col-md-2">
-                <label for="inputDNI" class="form-label">DNI</label>
-                <input type="text" class="form-control" id="inputDNI" placeholder="su DNI">
-            </div>
-            <div class="col-md-6">
-                <label for="inputEmail" class="form-label">Email</label>
-                <input type="email" class="form-control" id="inputEmail" placeholder="su E-mail">
-            </div>
-            <div class="col-12">
-                <label for="inputDireccion" class="form-label">Dirección</label>
-                <input type="text" class="form-control" id="inputDireccion" placeholder="su calle y numeracion">
-            </div>
-            <div class="col-md-2">
-                <label for="inputCP" class="form-label">Código postal</label>
-                <input type="text" class="form-control" id="inputCP" placeholder="código postal de su ciudad">
-            </div>
-            <div class="col-md-4">
-                <label for="inputProvincia" class="form-label">Provincia</label>
-                <select id="inputProvincia" class="form-select">
-                    <option value="bsas">Buenos Aires</option>
-                    <option value="Cordoba">Cordoba</option>
-                    <option value="SantaFe">Santa Fe</option>
-                </select>
-            </div>
-            <div class="col-12">
-                <button type="submit" id="registrarme" class="btn btn-primary">Registrarme</button>
-            </div>
-        </form>
+    <div class="container">
+    <h2>Carrito</h2>
+    <hr>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Item</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Accion</th>
+                <th scope="col">Total</th>
+            </tr>
+        </thead> 
+        <tbody id="items">
+        </tbody>
+        <tfoot>
+            <tr id="footer">
+                <th scope="row" colspan="5">Carrito vacio, ¡comienza a comprar!</th>
+            </tr>
+        </tfoot>
+    </table>
+    <div class="tabla" id="cards"></div>
+</div>
 
-<!--carrito-->
-<h2>Tu carrito</h2>
-<div id="lista-productos"></div>
- <!--Tienda-->
-     <div class="tienda">
-            <h3>Tienda</h3>
-            <div class="busqueda">
-                <div>
-                    <label for="buscaNombre" class="busqueda"><p>Buscar por nombre</p></label>
-                    <input type="text" class="inputBusqueda" id="nombre">
-                </div>
-                <div>
-                    <label for="buscaCategoria"><p>Buscar por categoria</p></label>
-                    <input type="text" name="" class="inputBusqueda" id="categoria">
-                </div>
-            </div>
-            <div class="contenedorTarjetas card-group">
+<template id="template-footer">
+    <th scope="row" colspan="2">Total productos</th>
+    <td>10</td>
+    <td>
+    <button class="btn btn-danger btn-sm" id="vaciar-carrito"> Borrar todo</button>
+    </td>
+    <td class="font-weight-bold">$ <span> 5000 </span> 
+    </td>
+</template id="template-carrito">
+    <tr>
+        <th scope="row">id</th>
+        <td>10</td>
+    </tr>
+
+<template id="template-carrito">
+    <tr>
+        <th scope="row">id</th>
+        <td>Taza</td>
+        <td>1</td>
+        <td>
+            <button class="btn btn-info btn-sm"> + </button>
+            <button  class="btn btn-danger btn-sm"> - </button>
+        </td>
+        <td> <span>500</span></td>
+    </tr>
+</template>
+
+<template id="template-card">
+    <div class="col-12 mb-2 col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <img src="" alt="" class="card-img-top">
+                <h3>Titulo</h3>
+                <p>Precio</p>
+                <button class="btn btn-dark">Comprar</button>
             </div>
         </div>
+     </div>   
+</template>
+
 </main>
 
 <footer class="bg-light">

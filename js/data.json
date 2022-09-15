@@ -1,6 +1,6 @@
 [
 	{
-		"id":"1",
+		"id":1,
 		"nombre": "Taza",
 		"codigo": "UN3N293",
     	"precio": 800,
@@ -8,7 +8,7 @@
     	"imagen": "./img/taza.jpg",
     	"descripcion": "Taza hecha de ceramica"
 },{
-		"id":"2",
+		"id":2,
 		"nombre": "Juego de Platos",
 		"codigo": "UN520S",
 		"categoria": "Hogar",
@@ -16,7 +16,7 @@
     	"imagen": "./img/platos.jpg",
     	"descripcion": "Juego de platos de cristal, 12 unidades"
 },{
-		"id":"3",
+		"id":3,
 		"nombre": "Cubiertos",
 		"codigo": "UN3820",
 		"categoria": "Hogar",
@@ -24,7 +24,7 @@
     	"imagen":"./img/cubiertos.jpg",
     	"descripcion": "Juego de cubiertos de acero"
 },{
-		"id":"4",
+		"id":4,
 		"nombre":"Vasos",
 		"codigo": "UN2933",
 		"categoria": "Hogar",
@@ -32,7 +32,7 @@
     	"imagen": "./img/vasos.jpg",
     	"descripcion": "Juego de vasos de vidrio, 6 unidades"
 },{
-		"id":"5",
+		"id":5,
 		"nombre": "Vaso",
 		"codigo": "UN2933",
 		"categoria":"Hogar",
